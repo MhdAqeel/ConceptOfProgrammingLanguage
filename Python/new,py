@@ -1,0 +1,39 @@
+# Initialize the dictionary
+student_grades = {}
+
+def add_student(grades_dict, name, grade):
+    """Adds or updates a student's grade in the dictionary."""
+    # Directly assigning a value to a key adds/updates the entry
+    grades_dict[name] = grade
+
+def remove_student(grades_dict, name):
+    """Removes a student from the dictionary if they exist."""
+    # Using pop() with a default value prevents a KeyError
+    grades_dict.pop(name, None)
+
+def get_grade(grades_dict, name):
+    """Returns the student's grade or a message if not found."""
+    # The get() method returns a custom message if the key is missing
+    return grades_dict.get(name, "Student not found in dictionary.")
+
+def average_grade(grades_dict):
+    """Converts letter grades to points and calculates the average."""
+    if not grades_dict:
+        return 0
+    
+    # Mapping for letter grades to numerical values
+    grade_scale = {'A': 4, 'B': 3, 'C': 2, 'D': 1, 'F': 0}
+    
+    total_points = 0
+    for grade in grades_dict.values():
+        # Convert each letter grade to its point value
+        total_points += grade_scale.get(grade.upper(), 0)
+        
+    return total_points / len(grades_dict)
+
+# Example usage:
+add_student(student_grades, "Alice", "A")
+add_student(student_grades, "Bob", "B")
+add_student(student_grades, "Charlie", "C")
+
+print(f"Average: {average_grade(student_grades)}") # Output: 3.0
